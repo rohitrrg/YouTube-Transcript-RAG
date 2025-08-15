@@ -1,7 +1,6 @@
-import os
 import streamlit as st
-
 from youtube_rag import YouTubeRetriever
+
 DEFAULT_LLM_MODEL = "MistralAI-7B"
 
 @st.cache_resource
