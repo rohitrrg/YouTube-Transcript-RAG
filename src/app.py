@@ -35,6 +35,7 @@ if "qa_chain" not in st.session_state:
 if "loaded_docs" not in st.session_state:
     st.session_state.loaded_docs = None
 
+
 def _load_and_index(video_id: str):
     docs = ytr.load_transcript_as_docs(video_id)
     chunks = ytr.split_documents(docs, chunk_size=chunk_size, chunk_overlap=chunk_overlap)
@@ -55,6 +56,7 @@ if go:
         # st.session_state.loaded_docs = docs
     except Exception as e:
         st.error(f"Failed to load transcript: {e}")
+
 
 st.divider()
 st.subheader("Ask a question about the video")

@@ -1,0 +1,9 @@
+streamlit
+torch
+transformers
+langchain_huggingface
+langchain
+re
+youtube_transcript_api
+langchain_community
+langchain_core
