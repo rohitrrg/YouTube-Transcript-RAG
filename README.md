@@ -7,9 +7,6 @@ bitsandbytes and caching strategies.
 * Built an interactive Streamlit interface for transcript indexing, retrieval, and real-time question answering.
 * Containerized the application with Docker for reproducible deployment on local and cloud environments.
 
-This project implements a Retrieval-Augmented Generation (RAG) pipeline that allows users to query YouTube video transcripts in real time.  
-The app fetches the transcript, chunks and embeds it using FAISS, and then uses an open-source LLM (Mistral/Gemma) to provide context-aware answers.  
-The interface is built with Streamlit and packaged with Docker for easy deployment.
 
 This project implements a Retrieval-Augmented Generation (RAG) pipeline that allows users to query YouTube video transcripts in real time.  
 The app fetches the transcript, chunks and embeds it using FAISS, and then uses an open-source LLM (Mistral/Gemma) to provide context-aware answers.  
@@ -17,12 +14,11 @@ The interface is built with Streamlit and packaged with Docker for easy deployme
 
 ## Demo
 
-Click below to watch a quick demo of the app in action:
 
 
 [![Watch the demo](https://img.youtube.com/vi/hmtuvNfytjM/0.jpg)](https://www.youtube.com/watch?v=hmtuvNfytjM)
 
-Alternatively, here’s a screenshot of the running app (click to watch the full demo):
+
 
 
 ![App Demo](<assets/Screenshot 2025-08-17 131354.png>)
