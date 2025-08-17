@@ -7,4 +7,4 @@ bitsandbytes and caching strategies.
 * Built an interactive Streamlit interface for transcript indexing, retrieval, and real-time question answering.
 * Containerized the application with Docker for reproducible deployment on local and cloud environments.
 
-[![Watch the demo](https://img.youtube.com/vi/hmtuvNfytjM&t/0.jpg)](https://www.youtube.com/watch?v=hmtuvNfytjM&t)
+[![Watch the demo](https://img.youtube.com/vi/hmtuvNfytjM/0.jpg)](https://www.youtube.com/watch?v=hmtuvNfytjM)
