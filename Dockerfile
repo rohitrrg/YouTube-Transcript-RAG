@@ -30,8 +30,8 @@ RUN pip install -r requirements.txt
 # Use the environment variable for login
 RUN --mount=type=secret,id=huggingface_token \
     pip install huggingface_hub && \
-    cat /run/secrets/huggingface_token | huggingface-cli login \
-    && huggingface-cli download \
+    hf auth login --token $(cat /run/secrets/huggingface_token) && \
+    huggingface-cli download \
     --repo-id "mistralai/Mistral-7B-Instruct-v0.3" \
     --local-dir "/app/Mistral-7B-Instruct-v0.3" \
     --local-dir-use-symlinks False
