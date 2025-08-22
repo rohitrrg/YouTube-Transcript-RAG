@@ -29,9 +29,8 @@ RUN pip install -r requirements.txt
 # Authenticate and download the gated model
 # Use the environment variable for login
 RUN --mount=type=secret,id=huggingface_token \
-    pip install huggingface_hub && \
-    hf auth login --token $(cat /run/secrets/huggingface_token) && \
-    python -m huggingface_hub download --repo-id "mistralai/Mistral-7B-Instruct-v0.3" --local-dir "/app/Mistral-7B-Instruct-v0.3" \
+    pip install -U "huggingface_hub[cli]" && \
+    python -m hf download mistralai/Mistral-7B-Instruct-v0.3 --local-dir "/app/Mistral-7B-Instruct-v0.3" \
     --local-dir-use-symlinks False
 
 # --- Copy your app code ---
