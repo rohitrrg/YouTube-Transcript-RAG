@@ -30,4 +30,4 @@ RUN mkdir -p /hf /tmp/offload && chmod -R 777 /hf /tmp/offload
 
 # --- Expose and run ---
 EXPOSE 8501
-CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0", "--server.port=8501"]
+CMD ["streamlit", "run", "app.py", "--server.port=8501"]
