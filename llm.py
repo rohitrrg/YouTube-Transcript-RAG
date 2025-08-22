@@ -32,9 +32,8 @@ class Gemma3(Runnable):
 
 class Mistral(Runnable):
     def __init__(self):
-        ckpt = "mistralai/Mistral-7B-Instruct-v0.3"
+        ckpt = "./Mistral-7B-Instruct-v0.3"
         self.tokenizer = AutoTokenizer.from_pretrained(ckpt)
-
         bnb = BitsAndBytesConfig(
                 load_in_4bit=True,
                 bnb_4bit_quant_type="nf4",
