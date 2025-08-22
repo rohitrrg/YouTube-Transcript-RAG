@@ -25,15 +25,15 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: youtuberagdocker.azurecr.io/
-          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_799E1C06B1FE40B7A49330F9BD4391EF }}
-          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_49DF887CDBEB4A8295434D5277032320 }}
+          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_8417AC8BB86F4D9C8D39D9E6866F7974 }}
+          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_C0E4DE95E9AB4D4590C98537906B95B7 }}
 
       - name: Build and push container image to registry
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: youtuberagdocker.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_799E1C06B1FE40B7A49330F9BD4391EF }}/youtuberagdockerimage:${{ github.sha }}
+          tags: youtuberagdocker.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_8417AC8BB86F4D9C8D39D9E6866F7974 }}/youtuberagdockerimage:${{ github.sha }}
           file: ./Dockerfile
 
   deploy:
@@ -50,9 +50,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_3697BC9BFA2F4B14957902F5CF965F2A }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CBDCA6FCEB35402AB0CF06717F948F2F }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_532C45FC293547EC8D74DB882E8CBB12 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EBA13EEE8F4E423CB0FA6A366D7AF6EB }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_95F582EEB3C9486D93ED3580F8A4DA82 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_EAF7F086A43446CF86394059FDB8E3AF }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -60,5 +60,5 @@ jobs:
         with:
           app-name: 'YouTubeRAG'
           slot-name: 'Production'
-          images: 'youtuberagdocker.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_799E1C06B1FE40B7A49330F9BD4391EF }}/youtuberagdockerimage:${{ github.sha }}'
+          images: 'youtuberagdocker.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_8417AC8BB86F4D9C8D39D9E6866F7974 }}/youtuberagdockerimage:${{ github.sha }}'
           
