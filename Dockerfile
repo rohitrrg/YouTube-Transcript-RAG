@@ -31,7 +31,7 @@ RUN pip install -r requirements.txt
 RUN --mount=type=secret,id=huggingface_token \
     pip install huggingface_hub && \
     hf auth login --token $(cat /run/secrets/huggingface_token) && \
-    hf_hub_download --repo-id "mistralai/Mistral-7B-Instruct-v0.3" --local-dir "/app/Mistral-7B-Instruct-v0.3" \
+    python -m huggingface_hub download --repo-id "mistralai/Mistral-7B-Instruct-v0.3" --local-dir "/app/Mistral-7B-Instruct-v0.3" \
     --local-dir-use-symlinks False
 
 # --- Copy your app code ---
