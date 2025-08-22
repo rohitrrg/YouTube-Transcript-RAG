@@ -4,9 +4,6 @@ from langchain_huggingface import HuggingFacePipeline
 from langchain.schema.runnable import Runnable
 import os
 
-# Either rely on env var auto-detection ...
-HF_TOKEN = os.getenv("HUGGINGFACE_HUB_TOKEN")
-
 class Gemma3(Runnable):
     def __init__(self):
         ckpt = "google/gemma-3-1b-pt"
@@ -34,7 +31,7 @@ class Gemma3(Runnable):
 
 class Mistral(Runnable):
     def __init__(self):
-        ckpt = "mistralai/Mistral-7B-Instruct-v0.3"
+        ckpt = "Mistral-7B-Instruct-v0.3"
         self.tokenizer = AutoTokenizer.from_pretrained(ckpt, token=HF_TOKEN)
 
         bnb = BitsAndBytesConfig(
