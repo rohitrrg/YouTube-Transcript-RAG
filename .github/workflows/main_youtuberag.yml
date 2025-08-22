@@ -1,0 +1,64 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - youtuberag
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read #This is required for actions/checkout
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to container registry
+        uses: docker/login-action@v2
+        with:
+          registry: dockerimagestreamlit.azurecr.io/
+          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_B7333899E41D49D3B72E153ACDC3E7D5 }}
+          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_E9AFFA7939984046A53EB0FA19DD33BB }}
+
+      - name: Build and push container image to registry
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: dockerimagestreamlit.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_B7333899E41D49D3B72E153ACDC3E7D5 }}/youtuberagdocker:${{ github.sha }}
+          file: ./Dockerfile
+
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
+
+    needs: build
+    
+
+    steps:
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_3510CFEC321342CF9D80A669F55CB109 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DFD7C26099C241EEBD0FDED033FCA72B }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D3DF5FBAAB204201859CCFD9B176CD4F }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'youtuberag'
+          slot-name: 'Production'
+          images: 'dockerimagestreamlit.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_B7333899E41D49D3B72E153ACDC3E7D5 }}/youtuberagdocker:${{ github.sha }}'
+          
