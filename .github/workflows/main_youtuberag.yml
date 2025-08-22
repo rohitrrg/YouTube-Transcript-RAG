@@ -25,15 +25,15 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: rohitdocker.azurecr.io/
-          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_FB32F2298C7A40B2963A9D02CBDA8FDF }}
-          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_A519098A7E2A4A7FA1AC6A82AC36FE31 }}
+          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_92243B800DFB4CF1A52522302368338A }}
+          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_D3A588265D46428D96F873ACAEFD0DC2 }}
 
       - name: Build and push container image to registry
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: rohitdocker.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_FB32F2298C7A40B2963A9D02CBDA8FDF }}/rohitdocker/youtuberag:${{ github.sha }}
+          tags: rohitdocker.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_92243B800DFB4CF1A52522302368338A }}/youtuberag:${{ github.sha }}
           file: ./Dockerfile
 
   deploy:
@@ -50,9 +50,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_55E1BC4D420D4370A700A66E65EA1ABC }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_33C773DE4F6B41EFBB1263D90CB8D94C }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_C135C4D2D3CA4555A3156DB4F6305F4C }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F2A32D79CFB54CE5AF0FA18E71136F5B }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_40A7C450A7D84ADFB052477715ACA6C2 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_05EAFCF80B5A4BDBB9D9126DEDB6FFB2 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -60,5 +60,5 @@ jobs:
         with:
           app-name: 'YouTubeRAG'
           slot-name: 'Production'
-          images: 'rohitdocker.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_FB32F2298C7A40B2963A9D02CBDA8FDF }}/rohitdocker/youtuberag:${{ github.sha }}'
+          images: 'rohitdocker.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_92243B800DFB4CF1A52522302368338A }}/youtuberag:${{ github.sha }}'
           
