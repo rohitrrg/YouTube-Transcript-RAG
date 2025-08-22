@@ -33,7 +33,7 @@ class Gemma3(Runnable):
 
 class Mistral(Runnable):
     def __init__(self):
-        ckpt = "mistralai/Mistral-7B-Instruct-v0.3"
+        ckpt = "google-bert/bert-large-uncased"
         self.tokenizer = AutoTokenizer.from_pretrained(ckpt, token=HUGGINGFACE_HUB_TOKEN)
 
         bnb = BitsAndBytesConfig(
