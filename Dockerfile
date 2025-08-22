@@ -30,7 +30,7 @@ RUN pip install -r requirements.txt
 # Use the environment variable for login
 RUN --mount=type=secret,id=huggingface_token \
     pip install -U "huggingface_hub[cli]" && \
-    python -m hf download mistralai/Mistral-7B-Instruct-v0.3 --local-dir "/app/Mistral-7B-Instruct-v0.3" \
+    hf download mistralai/Mistral-7B-Instruct-v0.3 --local-dir "/app/Mistral-7B-Instruct-v0.3" \
     --local-dir-use-symlinks False
 
 # --- Copy your app code ---
