@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 FROM python:3.10-slim
 
 ENV PIP_NO_CACHE_DIR=1 \
@@ -24,15 +25,12 @@ COPY requirements.txt /app
 RUN pip install -r requirements.txt
 
 # --- Hugging Face Model Download Modifications ---
-# Set the environment variable for the Hugging Face token
-ARG HUGGINGFACE_HUB_TOKEN
-
-# Install the Hugging Face CLI to handle authentication
-RUN pip install huggingface_hub
 
 # Authenticate and download the gated model
 # Use the environment variable for login
-RUN echo $HUGGINGFACE_HUB_TOKEN | huggingface-cli login \
+RUN --mount=type=secret,id=huggingface_token \
+    pip install huggingface_hub && \
+    cat /run/secrets/huggingface_token | huggingface-cli login \
     && huggingface-cli download \
     --repo-id "mistralai/Mistral-7B-Instruct-v0.3" \
     --local-dir "/app/Mistral-7B-Instruct-v0.3" \
