@@ -4,6 +4,8 @@ from langchain_huggingface import HuggingFacePipeline
 from langchain.schema.runnable import Runnable
 import os
 
+HUGGINGFACE_HUB_TOKEN = os.environ.get('HUGGINGFACE_HUB_TOKEN')
+
 class Gemma3(Runnable):
     def __init__(self):
         ckpt = "google/gemma-3-1b-pt"
@@ -31,8 +33,8 @@ class Gemma3(Runnable):
 
 class Mistral(Runnable):
     def __init__(self):
-        ckpt = "Mistral-7B-Instruct-v0.3"
-        self.tokenizer = AutoTokenizer.from_pretrained(ckpt, token=HF_TOKEN)
+        ckpt = "mistralai/Mistral-7B-Instruct-v0.3"
+        self.tokenizer = AutoTokenizer.from_pretrained(ckpt, token=HUGGINGFACE_HUB_TOKEN)
 
         bnb = BitsAndBytesConfig(
                 load_in_4bit=True,
@@ -48,7 +50,7 @@ class Mistral(Runnable):
             device_map="auto",
             low_cpu_mem_usage=True,
             offload_folder=os.environ.get("HF_HOME", "/tmp/offload"),
-            token=HF_TOKEN
+            token=HUGGINGFACE_HUB_TOKEN
         )
         print('✅ Mistral-7B-Instruct (4-bit) loaded on GPU.')
     

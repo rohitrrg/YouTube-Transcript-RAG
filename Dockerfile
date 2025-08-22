@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1.4
 FROM python:3.10-slim
 
 ENV PIP_NO_CACHE_DIR=1 \
@@ -23,16 +22,6 @@ RUN pip install torch==2.8.0+cu128 --index-url https://download.pytorch.org/whl/
 
 COPY requirements.txt /app
 RUN pip install -r requirements.txt
-
-# --- Hugging Face Model Download Modifications ---
-
-# Authenticate and download the gated model
-# Use the environment variable for login
-RUN --mount=type=secret,id=huggingface_token \
-    pip install -U "huggingface_hub[cli]" && \
-    hf auth login --token $(cat /run/secrets/huggingface_token) && \
-    hf download mistralai/Mistral-7B-Instruct-v0.3 \
-    --local-dir "/app/Mistral-7B-Instruct-v0.3"
 
 # --- Copy your app code ---
 COPY src/*.py /app/

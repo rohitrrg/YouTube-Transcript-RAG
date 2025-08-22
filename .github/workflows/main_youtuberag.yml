@@ -36,8 +36,8 @@ jobs:
           tags: dockerimagestreamlit.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_B7333899E41D49D3B72E153ACDC3E7D5 }}/youtuberagdocker:${{ github.sha }}
           file: ./Dockerfile
           # Pass the Hugging Face token as a build argument
-          secrets: |
-            huggingface_token=${{ secrets.HUGGINGFACE_HUB_TOKEN }}
+        env:
+          HUGGINGFACE_HUB_TOKEN: ${{ secrets.HUGGINGFACE_HUB_TOKEN }}
           
   deploy:
     runs-on: ubuntu-latest
