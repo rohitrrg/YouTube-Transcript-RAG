@@ -3,6 +3,7 @@ from llm import Mistral
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.docstore.document import Document
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled
+from youtube_transcript_api.proxies import WebshareProxyConfig
 from langchain_community.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain_core.prompts import PromptTemplate
@@ -16,7 +17,12 @@ class YouTubeRetriever:
     def __init__(self):
         self.llm = Mistral()
         self.embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5")
-        self.ytt_api = YouTubeTranscriptApi()
+        self.ytt_api = YouTubeTranscriptApi(
+            proxy_config = WebshareProxyConfig(
+                proxy_username="zgqpqwdi",
+                proxy_password="l7uq2orsu8xi",
+            )
+        )
         self.prompt = PromptTemplate(
                         template="""
                         You are a helpful assistant.
