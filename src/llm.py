@@ -45,7 +45,7 @@ class Mistral(Runnable):
         
         self.model = AutoModelForCausalLM.from_pretrained(
             ckpt,
-            quantization_config=bnb,
+            # quantization_config=bnb,
             torch_dtype=torch.bfloat16,
             device_map="auto",
             low_cpu_mem_usage=True,

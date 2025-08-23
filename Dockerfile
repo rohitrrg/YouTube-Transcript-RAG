@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 
 RUN pip install --upgrade pip
-RUN pip install torch==2.8.0+cu128 --index-url https://download.pytorch.org/whl/cu128
+RUN pip install torch==2.8.0
 
 COPY requirements.txt /app
 RUN pip install -r requirements.txt
